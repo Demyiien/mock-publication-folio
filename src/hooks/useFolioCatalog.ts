@@ -20,7 +20,7 @@ const normalize = (value: string): string => value.trim().toLowerCase();
 
 const matchesQuery = (entry: FolioEntry, query: string): boolean => {
   if (!query) return true;
-  const haystack = [entry.title, entry.subtitle ?? '', entry.author.name, entry.excerpt]
+  const haystack = [entry.title, entry.subtitle ?? '', entry.excerpt]
     .join(' ')
     .toLowerCase();
   return haystack.includes(query);

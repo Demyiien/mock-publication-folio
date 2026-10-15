@@ -1,7 +1,7 @@
 import { LayoutGrid, Rows3 } from 'lucide-react';
 import type { ViewMode } from '../../types/folio';
 import { ISSUE_META } from '../../data/folioEntries';
-import { Badge } from '../ui/Badge';
+import ttspLogo from '../../assets/images/ttsp-logo.png';
 import { Button } from '../ui/Button';
 import { MetaItem } from '../ui/MetaItem';
 
@@ -28,14 +28,17 @@ export function Masthead({ viewMode, onViewModeChange, totalWorks }: MastheadPro
           <MetaItem label="VOL" value="XLII" />
           <MetaItem label="WORKS" value={String(totalWorks).padStart(2, '0')} />
         </div>
-        <Badge label="Exhibition Open" variant="outline" className="masthead__status" />
       </div>
 
       <div className="masthead__bar container">
         <a className="masthead__identity" href="#top" aria-label="The TTSP Folio — back to top">
-          <span className="masthead__mark" aria-hidden="true">
-            T
-          </span>
+          <img
+            className="masthead__logo"
+            src={ttspLogo}
+            alt="The Technologian Student Press Crest"
+            width={44}
+            height={51}
+          />
           <span className="masthead__titles">
             <span className="masthead__title">
               {ISSUE_META.publication} <span className="masthead__slash">{'·'}</span> {ISSUE_META.folio}

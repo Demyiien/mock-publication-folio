@@ -15,9 +15,6 @@ interface LedgerRowProps {
 export function LedgerRow({ entry, onSelect }: LedgerRowProps) {
   return (
     <tr className="ledger-row" onClick={() => onSelect(entry)}>
-      <td className="ledger-row__cell ledger-row__cat" data-label="Cat.">
-        {entry.catalogNumber}
-      </td>
       <th scope="row" className="ledger-row__cell ledger-row__title" data-label="Title">
         <span className="ledger-row__title-main">{entry.title}</span>
         {entry.subtitle && <span className="ledger-row__subtitle">{entry.subtitle}</span>}
@@ -27,9 +24,6 @@ export function LedgerRow({ entry, onSelect }: LedgerRowProps) {
       </td>
       <td className="ledger-row__cell ledger-row__theme" data-label="Theme">
         {entry.theme}
-      </td>
-      <td className="ledger-row__cell ledger-row__author" data-label="Author">
-        {entry.author.name}
       </td>
       <td className="ledger-row__cell ledger-row__specs" data-label="Specs">
         {entry.specsOrReadTime}

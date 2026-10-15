@@ -1,7 +1,5 @@
 import type { FolioEntry } from '../../types/folio';
 import { Badge } from '../ui/Badge';
-import { MetaItem } from '../ui/MetaItem';
-import { AuthorByline } from './AuthorByline';
 
 interface FolioCardProps {
   entry: FolioEntry;
@@ -79,7 +77,6 @@ export function FolioCard({ entry, variant = 'standard', onSelect }: FolioCardPr
   return (
     <article className={`folio-card folio-card--${variant}`} aria-labelledby={titleId}>
       <div className="folio-card__header">
-        <MetaItem label="INDEX" value={entry.catalogNumber} />
         <Badge label={entry.medium} variant="maroon" />
       </div>
 
@@ -97,14 +94,13 @@ export function FolioCard({ entry, variant = 'standard', onSelect }: FolioCardPr
       </div>
 
       <div className="folio-card__footer">
-        <AuthorByline author={entry.author} size="compact" />
         <button
           type="button"
           className="folio-card__trigger"
           onClick={() => onSelect(entry)}
           aria-label={`Inspect work: ${entry.title}`}
         >
-          Inspect Work <span aria-hidden="true">↗</span>
+          Read More <span aria-hidden="true">↗</span>
         </button>
       </div>
     </article>

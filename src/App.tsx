@@ -14,7 +14,7 @@ import { ReaderModal } from './components/folio/ReaderModal';
 
 const pad = (value: number): string => String(value).padStart(2, '0');
 
-const LEDGER_COLUMNS = ['Cat.', 'Title', 'Medium', 'Theme', 'Author', 'Specs', ''] as const;
+const LEDGER_COLUMNS = ['Title', 'Medium', 'Theme', 'Specs', ''] as const;
 
 export default function App() {
   const catalog = useFolioCatalog({

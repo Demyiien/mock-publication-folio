@@ -5,7 +5,6 @@ import type { FolioEntry, FolioMedium } from '../../types/folio';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { MetaItem } from '../ui/MetaItem';
-import { AuthorByline } from './AuthorByline';
 import { PullQuote } from './PullQuote';
 
 interface ReaderModalProps {
@@ -88,7 +87,7 @@ function PlateCanvas({ entry }: { entry: FolioEntry }) {
         </div>
         {(entry.artworkCaption || entry.artworkSource) && (
           <figcaption className="reader-plate__caption">
-            <span className="reader-plate__caption-label">Plate {entry.catalogNumber}</span>
+            <span className="reader-plate__caption-label">Exhibition Plate</span>
             {entry.artworkCaption && <p>{entry.artworkCaption}</p>}
             {entry.artworkSource && (
               <p className="reader-plate__source">
@@ -214,8 +213,6 @@ export function ReaderModal({ entry, position, onClose, onNext, onPrevious }: Re
 
           <div className="reader__body">
             <aside className="reader__dossier" ref={dossierRef} aria-label="Archival dossier">
-              <span className="reader__catalog">{entry.catalogNumber}</span>
-
               <div className="reader__badges">
                 <Badge label={entry.medium} variant="maroon" size="md" />
                 <Badge label={entry.theme} variant="outline" size="md" />
@@ -228,17 +225,13 @@ export function ReaderModal({ entry, position, onClose, onNext, onPrevious }: Re
                 {entry.subtitle && <p className="reader__subtitle">{entry.subtitle}</p>}
               </div>
 
-              <AuthorByline author={entry.author} size="full" />
-
               <PullQuote quote={entry.pullQuote} />
 
               <div className="reader__specs">
-                <MetaItem label="CAT NO." value={entry.catalogNumber} highlight />
                 <MetaItem label="MEDIUM" value={entry.medium.toUpperCase()} />
                 <MetaItem label="THEME" value={entry.theme.toUpperCase()} />
                 <MetaItem label="SPECS" value={entry.specsOrReadTime} />
                 <MetaItem label="ISSUE" value={entry.publishedDate} />
-                <MetaItem label="DESK" value={entry.author.deskRole.toUpperCase()} />
               </div>
 
               <nav className="reader__nav" aria-label="Browse works">
@@ -265,7 +258,7 @@ export function ReaderModal({ entry, position, onClose, onNext, onPrevious }: Re
               <div className={`reader__canvas-inner reader__canvas-inner--${entry.medium === 'Poetry' ? 'verse' : 'prose'}`}>
                 <ReadingCanvas entry={entry} />
                 <p className="reader__end-mark" aria-hidden="true">
-                  ■ {entry.catalogNumber} — End of work
+                  ■ End of work
                 </p>
               </div>
             </div>

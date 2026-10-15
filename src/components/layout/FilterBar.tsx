@@ -79,7 +79,7 @@ export function FilterBar({
             id="folio-search"
             className="search-field__input"
             type="search"
-            placeholder="Title, author, or excerpt…"
+            placeholder="Title or excerpt…"
             autoComplete="off"
             spellCheck={false}
             value={query}
