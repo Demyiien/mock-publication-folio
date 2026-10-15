@@ -1,33 +1,79 @@
 /* ==========================================================================
    DESIGN TOKENS — THE TTSP FOLIO
-   Single source of truth. No raw hex values, font stacks, or spacing
-   literals should appear outside this file.
+   Single source of truth. Default is Light Mode (archival paper & ink).
+   Dark Mode provides refined dark charcoal gray (not pitch black).
    ========================================================================== */
 
-:root {
-  /* Color Palette — Press Black & Editorial Maroon */
-  --bg-canvas: #0A0A0A;
-  --bg-surface: #111111;
-  --bg-surface-elevated: #161616;
-  --bg-surface-hover: #1A1214;
-  --bg-maroon-subtle: #24070E;
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* Color Palette — Archival Newsprint & Editorial Maroon */
+  --bg-canvas: #F8F7F4;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-surface-hover: #F2EBEB;
+  --bg-maroon-subtle: #F9EBEE;
+
+  --color-maroon-primary: #800020;
+  --color-maroon-bright: #9E1B32;
+  --color-maroon-border: #B85C6D;
+
+  --text-primary: #181818;
+  --text-secondary: #4A4A4A;
+  --text-muted: #76736A;
+  --text-on-maroon: #FAF8F5;
+
+  /* Structural Borders */
+  --border-color: #DDD8CE;
+  --border-color-strong: #BDB7AA;
+  --border-hairline: 1px solid var(--border-color);
+  --border-maroon: 1px solid var(--color-maroon-primary);
+  --border-maroon-bright: 1px solid var(--color-maroon-bright);
+  --border-strong: 1px solid var(--border-color-strong);
+
+  /* Imagery treatment — original colors preserved */
+  --filter-archival: none;
+  --filter-archival-hover: none;
+  --vignette: none;
+  --overlay-modal: rgba(24, 24, 24, 0.7);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Color Palette — Refined Dark Gray & Editorial Maroon */
+  --bg-canvas: #1E1E1E;
+  --bg-surface: #262626;
+  --bg-surface-elevated: #2E2E2E;
+  --bg-surface-hover: #322528;
+  --bg-maroon-subtle: #36131B;
 
   --color-maroon-primary: #800020;
   --color-maroon-bright: #A8182E;
   --color-maroon-border: #59091B;
 
-  --text-primary: #F4F1EA;
-  --text-secondary: #A6A196;
-  --text-muted: #6E6A61;
+  --text-primary: #F0ECE2;
+  --text-secondary: #A8A398;
+  --text-muted: #827E74;
   --text-on-maroon: #FAF8F5;
 
   /* Structural Borders */
-  --border-color: #24221F;
-  --border-color-strong: #383530;
+  --border-color: #3B3936;
+  --border-color-strong: #524F49;
   --border-hairline: 1px solid var(--border-color);
   --border-maroon: 1px solid var(--color-maroon-primary);
   --border-maroon-bright: 1px solid var(--color-maroon-bright);
+  --border-strong: 1px solid var(--border-color-strong);
 
+  /* Imagery treatment — original colors preserved */
+  --filter-archival: none;
+  --filter-archival-hover: none;
+  --vignette: none;
+  --overlay-modal: rgba(26, 26, 26, 0.94);
+}
+
+:root {
   /* Typography */
   --font-display: 'Instrument Serif', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -48,7 +94,7 @@
   --transition-base: 260ms cubic-bezier(0.16, 1, 0.3, 1);
 
   /* --------------------------------------------------------------------
-     Extended editorial tokens (derived from the base palette above)
+     Extended editorial tokens
      -------------------------------------------------------------------- */
 
   /* Type scale */
@@ -78,13 +124,6 @@
   /* Rules */
   --rule-maroon-thick: 2px solid var(--color-maroon-primary);
   --rule-maroon-heavy: 4px solid var(--color-maroon-primary);
-  --border-strong: 1px solid var(--border-color-strong);
-
-  /* Imagery treatment */
-  --filter-archival: grayscale(100%) contrast(115%) brightness(0.88);
-  --filter-archival-hover: grayscale(100%) contrast(128%) brightness(1);
-  --vignette: radial-gradient(ellipse at center, transparent 45%, rgba(10, 10, 10, 0.72) 100%);
-  --overlay-modal: rgba(10, 10, 10, 0.92);
 
   /* Layout */
   --container-max: 1440px;

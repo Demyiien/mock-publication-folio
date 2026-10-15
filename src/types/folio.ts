@@ -8,10 +8,10 @@
 export type FolioMedium = 'Poetry' | 'Short Essay' | 'Editorial Cartoon' | 'Photo Essay';
 
 export type FolioTheme =
-  | 'Dissent & Memory'
-  | 'Campus Ephemera'
-  | 'Mother Tongue'
-  | 'Urban Rust';
+  | 'News'
+  | 'Opinion'
+  | 'Features'
+  | 'Community';
 
 /** Sentinel used by filters to represent "no restriction". */
 export type FilterAll = 'All';

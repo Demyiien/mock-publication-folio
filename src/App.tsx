@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { Filter } from 'lucide-react';
 import { FOLIO_MEDIUMS, FOLIO_THEMES, folioEntries } from './data/folioEntries';
 import { useFolioCatalog } from './hooks/useFolioCatalog';
+import { useTheme } from './hooks/useTheme';
 import { Masthead } from './components/layout/Masthead';
 import { HeroManifesto } from './components/layout/HeroManifesto';
 import { FilterBar } from './components/layout/FilterBar';
@@ -12,6 +13,7 @@ import { FolioCard } from './components/folio/FolioCard';
 import { ReaderModal } from './components/folio/ReaderModal';
 
 export default function App() {
+  const { theme, toggleTheme } = useTheme();
   const catalog = useFolioCatalog({
     entries: folioEntries,
     mediums: FOLIO_MEDIUMS,
@@ -28,7 +30,7 @@ export default function App() {
         Skip to exhibition catalog
       </a>
 
-      <Masthead />
+      <Masthead theme={theme} onToggleTheme={toggleTheme} />
 
       <main className="container main">
         <HeroManifesto

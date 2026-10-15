@@ -2,8 +2,8 @@ import type { FolioEntry, FolioMedium, FolioTheme } from '../types/folio';
 
 /**
  * Static exhibition dataset.
- * Eight curated works with generic title placeholders, classical Lorem Ipsum text,
- * accurate photo sources, and typographic middle dot dividers.
+ * Curated journalism works with generic, universal press themes (News, Opinion, Features, Community),
+ * photojournalistic captions, descriptive subtitles, and classical Latin prose excerpts.
  */
 
 const unsplash = (photoId: string): string =>
@@ -17,15 +17,15 @@ export const FOLIO_MEDIUMS: readonly FolioMedium[] = [
 ];
 
 export const FOLIO_THEMES: readonly FolioTheme[] = [
-  'Dissent & Memory',
-  'Campus Ephemera',
-  'Mother Tongue',
-  'Urban Rust',
+  'News',
+  'Opinion',
+  'Features',
+  'Community',
 ];
 
 export const ISSUE_META = {
   publication: 'The Technologian Student Press',
-  folio: 'The TTSP Folio',
+  folio: 'Folio',
   motto: 'Documentation, Literature & Visual Arts Archive',
   issueDate: 'OCT 2026',
   volume: '',
@@ -37,9 +37,9 @@ export const folioEntries: FolioEntry[] = [
     id: 'poetry-selection-01',
     catalogNumber: 'CAT-01',
     title: 'Poetry Selection 01',
-    subtitle: 'Stanza Study in Five Parts',
+    subtitle: 'Stanza Reflections on Labor & Urban Life',
     medium: 'Poetry',
-    theme: 'Urban Rust',
+    theme: 'Features',
     author: {
       name: 'Student Contributor 01',
       programAndYear: 'BA Literature III',
@@ -64,9 +64,9 @@ export const folioEntries: FolioEntry[] = [
     id: 'short-essay-01',
     catalogNumber: 'CAT-02',
     title: 'Short Essay 01',
-    subtitle: 'Critical Notes on Archival Records',
+    subtitle: 'Critical Notes on Press Freedom & Public Accountability',
     medium: 'Short Essay',
-    theme: 'Dissent & Memory',
+    theme: 'Opinion',
     author: {
       name: 'Student Contributor 02',
       programAndYear: 'BS Journalism IV',
@@ -90,17 +90,17 @@ export const folioEntries: FolioEntry[] = [
   {
     id: 'photo-essay-01',
     catalogNumber: 'CAT-03',
-    title: 'Photo Essay 01',
-    subtitle: 'Monochrome Photographic Series',
+    title: 'Monsoon Over the Quadrangle',
+    subtitle: 'Rainy Season Dispatches Across Campus Grounds',
     medium: 'Photo Essay',
-    theme: 'Campus Ephemera',
+    theme: 'Features',
     author: {
       name: 'Max Bender',
       programAndYear: 'Contributing Artist',
       deskRole: 'Unsplash Photography',
     },
     publishedDate: 'OCT 2026',
-    specsOrReadTime: '35MM · ILFORD HP5+ · 300 DPI',
+    specsOrReadTime: '35MM · 300 DPI',
     excerpt:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.',
     pullQuote:
@@ -109,11 +109,11 @@ export const folioEntries: FolioEntry[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
       'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.',
       'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.',
-      'Curatorial note: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.',
+      'Curatorial note: High-resolution documentary capture of afternoon showers across the university quadrangle.',
     ],
     artworkUrl: unsplash('photo-1515694346937-94d85e41e6f0'),
     artworkCaption:
-      'Plate 01. Water droplets on window surface, ambient monochrome exposure. Silver gelatin archival scan, 4800 DPI.',
+      'Raindrops streak across a lecture hall window as afternoon showers sweep over the campus walkway.',
     artworkSource: 'Max Bender on Unsplash',
     artworkSourceUrl:
       'https://unsplash.com/photos/water-droplets-on-clear-glass-1YHXFeOYpN0',
@@ -123,9 +123,9 @@ export const folioEntries: FolioEntry[] = [
     id: 'editorial-cartoon-01',
     catalogNumber: 'CAT-04',
     title: 'The Daily Broadsheet',
-    subtitle: 'Presswork & Financial Chronicle',
+    subtitle: 'Morning Editions Fresh off the Editorial Press',
     medium: 'Editorial Cartoon',
-    theme: 'Dissent & Memory',
+    theme: 'News',
     author: {
       name: 'AbsolutVision',
       programAndYear: 'Contributing Artist',
@@ -141,11 +141,11 @@ export const folioEntries: FolioEntry[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-      'Curatorial note: High-resolution monochrome study of printed business broadsheet columns and typographic press layout.',
+      'Curatorial note: Documentary photojournalism study of printed newsprint broadsheet columns and typographic layout.',
     ],
     artworkUrl: unsplash('photo-1504711434969-e33886168f5c'),
     artworkCaption:
-      'Plate 02. Printed business broadsheet newspaper articles and typographic presswork. Archival scan at 300 DPI.',
+      'Freshly bundled morning newspapers lie stacked in the editorial newsroom awaiting student distribution.',
     artworkSource: 'AbsolutVision on Unsplash',
     artworkSourceUrl:
       'https://unsplash.com/photos/business-newspaper-article-WYd_PkCa1BY',
@@ -155,9 +155,9 @@ export const folioEntries: FolioEntry[] = [
     id: 'poetry-selection-02',
     catalogNumber: 'CAT-05',
     title: 'Poetry Selection 02',
-    subtitle: 'Lyrical Sequence in Four Movements',
+    subtitle: 'Verses on Regional Roots & Student Identity',
     medium: 'Poetry',
-    theme: 'Mother Tongue',
+    theme: 'Community',
     author: {
       name: 'Student Contributor 05',
       programAndYear: 'BS Computer Science III',
@@ -181,9 +181,9 @@ export const folioEntries: FolioEntry[] = [
     id: 'short-essay-02',
     catalogNumber: 'CAT-06',
     title: 'Short Essay 02',
-    subtitle: 'Field Notes and Analytical Commentary',
+    subtitle: 'Analytical Commentary on Campus Welfare & Civic Engagement',
     medium: 'Short Essay',
-    theme: 'Mother Tongue',
+    theme: 'Opinion',
     author: {
       name: 'Student Contributor 06',
       programAndYear: 'BA Literature II',
@@ -208,9 +208,9 @@ export const folioEntries: FolioEntry[] = [
     id: 'editorial-cartoon-02',
     catalogNumber: 'CAT-07',
     title: 'The Morning Reader',
-    subtitle: 'Park Bench Press Chronicle',
+    subtitle: 'Public Life & Daily Dispatches Along the Perimeter Park',
     medium: 'Editorial Cartoon',
-    theme: 'Campus Ephemera',
+    theme: 'Community',
     author: {
       name: 'Roman Kraft',
       programAndYear: 'Contributing Artist',
@@ -225,11 +225,11 @@ export const folioEntries: FolioEntry[] = [
     bodyContent: [
       'Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.',
       'Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero.',
-      'Curatorial note: Candid monochrome street capture of a park bench reader engrossed in the morning edition.',
+      'Curatorial note: Candid street photojournalism capture of a park bench reader engrossed in the morning edition.',
     ],
     artworkUrl: unsplash('photo-1495020689067-958852a7765e'),
     artworkCaption:
-      'Plate 03. Man seated on an outdoor park bench reading the morning newspaper broadsheet.',
+      'A university commuter reads through the morning edition while seated on an outdoor perimeter park bench.',
     artworkSource: 'Roman Kraft on Unsplash',
     artworkSourceUrl:
       'https://unsplash.com/photos/man-sitting-on-bench-reading-newspaper-_Zua2hyvTBk',
@@ -238,17 +238,17 @@ export const folioEntries: FolioEntry[] = [
   {
     id: 'photo-essay-02',
     catalogNumber: 'CAT-08',
-    title: 'Photo Essay 02',
-    subtitle: 'Architectural Study in High Contrast',
+    title: 'Skylines in Concrete & Glass',
+    subtitle: 'Metropolitan High-Rises Framing the University Corridor',
     medium: 'Photo Essay',
-    theme: 'Urban Rust',
+    theme: 'News',
     author: {
       name: 'Sean Pollock',
       programAndYear: 'Contributing Artist',
       deskRole: 'Unsplash Photography',
     },
     publishedDate: 'OCT 2026',
-    specsOrReadTime: 'DIGITAL MONOCHROME · 24 MP RAW',
+    specsOrReadTime: 'DIGITAL CAPTURE · 24 MP',
     excerpt:
       'Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut.',
     pullQuote:
@@ -256,11 +256,11 @@ export const folioEntries: FolioEntry[] = [
     bodyContent: [
       'Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla.',
       'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris.',
-      'Curatorial note: North façade low-angle architectural exposure. Converted from 24 MP RAW capture, exhibited without retouching.',
+      'Curatorial note: Architectural photojournalism perspective of commercial high-rises bordering the campus district.',
     ],
     artworkUrl: unsplash('photo-1486406146926-c627a92ad1ab'),
     artworkCaption:
-      'Plate 04. Upward perspective of board-formed architectural concrete façade. 24 MP monochrome capture.',
+      'Commercial towers and steel high-rises rise above the transit corridor bordering the university district.',
     artworkSource: 'Sean Pollock on Unsplash',
     artworkSourceUrl:
       'https://unsplash.com/photos/low-angle-photo-of-city-high-rise-buildings-during-daytime-PhYq704ffdA',

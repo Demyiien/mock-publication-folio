@@ -41,8 +41,6 @@ function CardPreview({ entry, isFeatured: _isFeatured }: { entry: FolioEntry; is
                 height={1000}
               />
             )}
-            <span className="artwork-frame__vignette" aria-hidden="true" />
-            <span className="artwork-frame__tint" aria-hidden="true" />
           </div>
           <figcaption className="folio-card__caption">
             {entry.artworkCaption && <p className="folio-card__caption-title">{entry.artworkCaption}</p>}

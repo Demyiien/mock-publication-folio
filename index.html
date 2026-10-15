@@ -1,10 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#F8F7F4" />
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('ttsp-folio-theme') || 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+          var metaTheme = document.querySelector('meta[name="theme-color"]');
+          if (metaTheme) {
+            metaTheme.setAttribute('content', theme === 'dark' ? '#1E1E1E' : '#F8F7F4');
+          }
+        } catch (e) {}
+      })();
+    </script>
     <meta
       name="description"
       content="THE TTSP FOLIO. A digital literary and visual arts exhibition of The Technologian Student Press."

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import type { KeyboardEvent, MouseEvent } from 'react';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
 import type { FolioEntry, FolioMedium } from '../../types/folio';
@@ -58,22 +58,10 @@ function ProseCanvas({ paragraphs }: { paragraphs: string[] }) {
 }
 
 function PlateCanvas({ entry }: { entry: FolioEntry }) {
-  const [isOriginal, setIsOriginal] = useState(false);
-
   return (
     <div className="reader-plate">
-      <div className="reader-plate__toolbar" role="group" aria-label="Artwork rendering">
-        <span className="reader-plate__toolbar-label">Rendering</span>
-        <Button size="sm" isActive={!isOriginal} aria-pressed={!isOriginal} onClick={() => setIsOriginal(false)}>
-          Full-Contrast
-        </Button>
-        <Button size="sm" isActive={isOriginal} aria-pressed={isOriginal} onClick={() => setIsOriginal(true)}>
-          Original
-        </Button>
-      </div>
-
       <figure className="reader-plate__figure">
-        <div className={`artwork-frame artwork-frame--plate${isOriginal ? ' is-original' : ''}`}>
+        <div className="artwork-frame artwork-frame--plate">
           {entry.artworkUrl && (
             <img
               className="artwork-frame__image"
@@ -83,7 +71,6 @@ function PlateCanvas({ entry }: { entry: FolioEntry }) {
               height={1000}
             />
           )}
-          <span className="artwork-frame__vignette" aria-hidden="true" />
         </div>
         {(entry.artworkCaption || entry.artworkSource) && (
           <figcaption className="reader-plate__caption">

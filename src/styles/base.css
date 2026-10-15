@@ -18,7 +18,7 @@ html {
   text-size-adjust: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: 8rem;
-  color-scheme: dark;
+  color-scheme: light dark;
   scrollbar-color: var(--border-color-strong) var(--bg-canvas);
   scrollbar-width: thin;
 }
@@ -33,6 +33,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  transition: background-color var(--transition-base), color var(--transition-base);
 }
 
 /* Lock page scroll while the exhibition reader is open. */
@@ -172,4 +173,56 @@ code {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
+
+/* ==========================================================================
+   VIEW TRANSITION (CIRCULAR THEME BURST / WAVE)
+   ========================================================================== */
+
+/* Disable default cross-fade animations on root view transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Ensure incoming theme snapshot expands on top */
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* While transitioning, freeze body CSS transitions so the view transition snapshot captures instant final state */
+html[data-theme-transitioning],
+html[data-theme-transitioning] * {
+  transition: none !important;
+}
+
+/* Fallback wave for browsers without View Transitions */
+.theme-burst-fallback-wave {
+  position: fixed;
+  z-index: 99999;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1), opacity 250ms ease-out;
+  box-shadow: 0 0 50px rgba(128, 0, 32, 0.35);
+}
+
+.theme-burst-fallback-wave.is-expanded {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.theme-burst-fallback-wave.is-fading {
+  opacity: 0;
+}
+
