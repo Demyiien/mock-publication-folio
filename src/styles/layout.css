@@ -1,0 +1,158 @@
+/* ==========================================================================
+   LAYOUT — container, Swiss 12-column grid, broadsheet section frames,
+   hairline catalog grid, and responsive breakpoints.
+   Breakpoints: 1024 (laptop) · 768 (tablet) · 640 (large phone) · 480 (phone)
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.main {
+  padding-top: var(--space-8);
+}
+
+/* Each section is a broadsheet column: exposed hairline rules on both sides. */
+.section {
+  border-inline: var(--border-hairline);
+  border-bottom: var(--border-hairline);
+}
+
+.section + .section {
+  margin-top: var(--space-10);
+}
+
+/* --------------------------------------------------------------------------
+   Swiss 12-column grid
+   -------------------------------------------------------------------------- */
+
+.swiss-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+/* Hero — 7 / 5 asymmetric split */
+.hero__manifesto {
+  grid-column: 1 / span 7;
+}
+
+.hero__spotlight {
+  grid-column: 8 / span 5;
+  border-left: var(--border-hairline);
+}
+
+/* Colophon — 5 / 3 / 4 split */
+.colophon__charter {
+  grid-column: span 5;
+}
+
+.colophon__specs {
+  grid-column: span 3;
+}
+
+.colophon__components {
+  grid-column: span 4;
+}
+
+/* --------------------------------------------------------------------------
+   Catalog — hairline grid where cells share borders like a folded broadsheet
+   -------------------------------------------------------------------------- */
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.catalog-grid__cell {
+  display: flex;
+  border-right: var(--border-hairline);
+  border-bottom: var(--border-hairline);
+}
+
+.catalog-grid__cell:nth-child(3n) {
+  border-right: none;
+}
+
+.catalog-grid__cell > * {
+  flex: 1;
+}
+
+/* Board credits */
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .hero__manifesto,
+  .hero__spotlight {
+    grid-column: 1 / -1;
+  }
+
+  .hero__spotlight {
+    border-left: none;
+    border-top: var(--border-hairline);
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .catalog-grid__cell:nth-child(3n) {
+    border-right: var(--border-hairline);
+  }
+
+  .catalog-grid__cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .colophon__charter {
+    grid-column: 1 / -1;
+  }
+
+  .colophon__specs,
+  .colophon__components {
+    grid-column: span 6;
+  }
+
+  .board-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding-top: var(--space-5);
+  }
+
+  .section + .section {
+    margin-top: var(--space-8);
+  }
+
+  .colophon__specs,
+  .colophon__components {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .catalog-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .catalog-grid__cell,
+  .catalog-grid__cell:nth-child(3n) {
+    border-right: none;
+  }
+
+  .board-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

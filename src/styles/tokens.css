@@ -1,0 +1,102 @@
+/* ==========================================================================
+   DESIGN TOKENS — THE TTSP FOLIO
+   Single source of truth. No raw hex values, font stacks, or spacing
+   literals should appear outside this file.
+   ========================================================================== */
+
+:root {
+  /* Color Palette — Press Black & Editorial Maroon */
+  --bg-canvas: #0A0A0A;
+  --bg-surface: #111111;
+  --bg-surface-elevated: #161616;
+  --bg-surface-hover: #1A1214;
+  --bg-maroon-subtle: #24070E;
+
+  --color-maroon-primary: #800020;
+  --color-maroon-bright: #A8182E;
+  --color-maroon-border: #59091B;
+
+  --text-primary: #F4F1EA;
+  --text-secondary: #A6A196;
+  --text-muted: #6E6A61;
+  --text-on-maroon: #FAF8F5;
+
+  /* Structural Borders */
+  --border-color: #24221F;
+  --border-color-strong: #383530;
+  --border-hairline: 1px solid var(--border-color);
+  --border-maroon: 1px solid var(--color-maroon-primary);
+  --border-maroon-bright: 1px solid var(--color-maroon-bright);
+
+  /* Typography */
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing Scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 260ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --------------------------------------------------------------------
+     Extended editorial tokens (derived from the base palette above)
+     -------------------------------------------------------------------- */
+
+  /* Type scale */
+  --text-2xs: 0.625rem;   /* 10px — archival micro labels */
+  --text-xs: 0.6875rem;   /* 11px — monospace metadata */
+  --text-sm: 0.8125rem;   /* 13px — UI controls */
+  --text-base: 1rem;      /* 16px — prose */
+  --text-lg: 1.1875rem;   /* 19px — reading canvas prose */
+  --text-xl: 1.625rem;    /* 26px — card titles */
+  --text-2xl: 2.25rem;    /* 36px — section titles */
+  --text-3xl: clamp(2.5rem, 4vw, 3.5rem);
+  --text-display: clamp(3.25rem, 8.2vw, 8rem);
+
+  --leading-tight: 0.95;
+  --leading-snug: 1.2;
+  --leading-body: 1.65;
+  --leading-verse: 1.9;
+
+  --tracking-mono: 0.12em;
+  --tracking-wide: 0.06em;
+  --tracking-display: -0.02em;
+
+  /* Radius — sharp by mandate */
+  --radius-none: 0px;
+  --radius-tag: 2px;
+
+  /* Rules */
+  --rule-maroon-thick: 2px solid var(--color-maroon-primary);
+  --rule-maroon-heavy: 4px solid var(--color-maroon-primary);
+  --border-strong: 1px solid var(--border-color-strong);
+
+  /* Imagery treatment */
+  --filter-archival: grayscale(100%) contrast(115%) brightness(0.88);
+  --filter-archival-hover: grayscale(100%) contrast(128%) brightness(1);
+  --vignette: radial-gradient(ellipse at center, transparent 45%, rgba(10, 10, 10, 0.72) 100%);
+  --overlay-modal: rgba(10, 10, 10, 0.92);
+
+  /* Layout */
+  --container-max: 1440px;
+  --gutter: var(--space-6);
+  --masthead-height: 4.25rem;
+  --measure-reading: 65ch;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --gutter: var(--space-4);
+    --text-2xl: 1.875rem;
+    --masthead-height: auto;
+  }
+}
