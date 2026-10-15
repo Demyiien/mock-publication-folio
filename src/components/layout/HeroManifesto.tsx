@@ -11,42 +11,40 @@ interface HeroManifestoProps {
 
 const pad = (value: number): string => String(value).padStart(2, '0');
 
-/** Section 01 — Curator's foreword (7 cols) beside the featured work (5 cols). */
+/** Section 01 — Curatorial foreword (7 cols) beside the featured work (5 cols). */
 export function HeroManifesto({ featuredEntry, onSelect, stats }: HeroManifestoProps) {
   return (
     <section className="section" aria-labelledby="section-foreword">
       <SectionHeader
         indexNumber="01"
-        title="Curator's Foreword & Featured Exhibition"
-        subtitle="Folio XLII — Annual literary & visual arts supplement"
+        title="Curator's Foreword & Featured Work"
+        subtitle="Folio XLII · Annual Literary & Visual Arts Archive"
         headingId="section-foreword"
       />
 
       <div className="swiss-grid hero">
         <div className="hero__manifesto">
-          <p className="hero__kicker">Issue Theme</p>
+          <p className="hero__kicker">Curatorial Foreword</p>
           <h1 className="hero__title">
-            Nocturne in <em>Maroon</em>
+            Exhibition <em>Foreword</em>
             <br />
-            <span className="hero__amp">&amp;</span> Concrete
+            <span className="hero__amp">&amp;</span> Archive
           </h1>
 
           <div className="hero__body">
             <p className="drop-cap">
-              Every campus keeps two archives. The first lives in the registrar's vault: transcripts,
-              memoranda, the minutes of meetings held behind closed doors. The second is written at
-              two in the morning by students who should be asleep—in verse scrawled on the back of
-              layout sheets, in photographs of floodwater at the gate, in cartoons pinned to a
-              pressroom corkboard until someone in an office upstairs asks for them to be taken down.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+              et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+              aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur.
             </p>
             <p>
-              This Folio is the second archive, bound and opened to the public. We present these
-              eight works not as decoration for the news but as news itself: a record of what it
-              felt like to study, commute, dissent, and remember during the forty-second year of
-              The Technologian Student Press. Read them slowly. They were made in the dark, and they
-              are still warm.
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+              totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
+              sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+              consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
             </p>
-            <p className="hero__signature">— The Folio Editorial Board, Pressroom B-214</p>
+            <p className="hero__signature">— The Editorial Board · Exhibition Archive</p>
           </div>
 
           <div className="hero__stats">

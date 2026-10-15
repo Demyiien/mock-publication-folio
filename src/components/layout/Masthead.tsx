@@ -38,7 +38,7 @@ export function Masthead({ viewMode, onViewModeChange, totalWorks }: MastheadPro
           </span>
           <span className="masthead__titles">
             <span className="masthead__title">
-              {ISSUE_META.publication} <span className="masthead__slash">{'//'}</span> {ISSUE_META.folio}
+              {ISSUE_META.publication} <span className="masthead__slash">{'·'}</span> {ISSUE_META.folio}
             </span>
             <span className="masthead__motto">“{ISSUE_META.motto}”</span>
           </span>

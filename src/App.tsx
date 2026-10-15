@@ -91,11 +91,11 @@ export default function App() {
               <span className="empty-state__index" aria-hidden="true">
                 ∅
               </span>
-              <h3 className="empty-state__title">No works answer to that description.</h3>
+              <h3 className="empty-state__title">No works match the selected criteria.</h3>
               <p className="empty-state__text">
                 The archive holds {catalog.totalCount} works, but none match
-                {catalog.query ? ` “${catalog.query}”` : ' this combination of filters'}. Widen the
-                search, or return to the full exhibition.
+                {catalog.query ? ` “${catalog.query}”` : ' this filter selection'}. Clear the
+                search query or reset filters to view all entries.
               </p>
               <Button variant="primary" onClick={catalog.resetFilters}>
                 Reset All Filters

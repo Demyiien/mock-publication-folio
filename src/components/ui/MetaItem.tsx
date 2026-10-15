@@ -21,7 +21,7 @@ export function MetaItem({ label, value, highlight = false, orientation = 'inlin
       <span className="meta-item__label">{label}</span>
       {orientation === 'inline' && (
         <span className="meta-item__divider" aria-hidden="true">
-          {'//'}
+          {'·'}
         </span>
       )}
       <span className="meta-item__value">{value}</span>

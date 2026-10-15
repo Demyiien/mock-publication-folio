@@ -9,9 +9,9 @@ export function Colophon() {
     <footer className="colophon colophon--minimal">
       <div className="colophon__base container">
         <span>
-          © 2026 {ISSUE_META.publication} {'//'} {ISSUE_META.folio}
+          © 2026 {ISSUE_META.publication} {'·'} {ISSUE_META.folio}
         </span>
-        <span>Set in the dark. Printed nowhere. Archived everywhere.</span>
+        <span>Curated Exhibition Catalog · All Rights Reserved.</span>
         <a href="#top" className="colophon__top">
           Return to Masthead ↑
         </a>

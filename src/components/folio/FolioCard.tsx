@@ -41,8 +41,28 @@ function CardPreview({ entry }: { entry: FolioEntry }) {
             <span className="artwork-frame__tint" aria-hidden="true" />
             <Badge label={entry.specsOrReadTime} variant="muted" className="artwork-frame__specs" />
           </div>
-          {entry.artworkCaption && (
-            <figcaption className="folio-card__caption">{entry.artworkCaption}</figcaption>
+          {(entry.artworkCaption || entry.artworkSource) && (
+            <figcaption className="folio-card__caption">
+              {entry.artworkCaption && <span>{entry.artworkCaption}</span>}
+              {entry.artworkSource && (
+                <span className="folio-card__source">
+                  Photo:{' '}
+                  {entry.artworkSourceUrl ? (
+                    <a
+                      href={entry.artworkSourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="folio-card__source-link"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {entry.artworkSource} ↗
+                    </a>
+                  ) : (
+                    entry.artworkSource
+                  )}
+                </span>
+              )}
+            </figcaption>
           )}
         </figure>
       );

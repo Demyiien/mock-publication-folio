@@ -86,10 +86,27 @@ function PlateCanvas({ entry }: { entry: FolioEntry }) {
           )}
           <span className="artwork-frame__vignette" aria-hidden="true" />
         </div>
-        {entry.artworkCaption && (
+        {(entry.artworkCaption || entry.artworkSource) && (
           <figcaption className="reader-plate__caption">
             <span className="reader-plate__caption-label">Plate {entry.catalogNumber}</span>
-            {entry.artworkCaption}
+            {entry.artworkCaption && <p>{entry.artworkCaption}</p>}
+            {entry.artworkSource && (
+              <p className="reader-plate__source">
+                Photo:{' '}
+                {entry.artworkSourceUrl ? (
+                  <a
+                    href={entry.artworkSourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="reader-plate__source-link"
+                  >
+                    {entry.artworkSource} ↗
+                  </a>
+                ) : (
+                  entry.artworkSource
+                )}
+              </p>
+            )}
           </figcaption>
         )}
       </figure>
@@ -182,7 +199,7 @@ export function ReaderModal({ entry, position, onClose, onNext, onPrevious }: Re
         <div className="reader__shell">
           <div className="reader__topbar">
             <span className="reader__topbar-label">
-              Exhibition Reader <span aria-hidden="true">{'//'}</span> {CANVAS_LABEL[entry.medium]}
+              Exhibition Reader <span aria-hidden="true">{'·'}</span> {CANVAS_LABEL[entry.medium]}
             </span>
             <span className="reader__counter" aria-live="polite">
               Work {pad(position.index + 1)} / {pad(position.total)}

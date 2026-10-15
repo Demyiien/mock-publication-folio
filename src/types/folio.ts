@@ -42,6 +42,8 @@ export interface FolioEntry {
   bodyContent: string[]; // Stanzas for poetry, paragraphs for essays, curatorial notes for visual art
   artworkUrl?: string; // High-contrast monochrome/moody photography or illustration URL
   artworkCaption?: string;
+  artworkSource?: string;
+  artworkSourceUrl?: string;
   isFeatured?: boolean;
 }
 

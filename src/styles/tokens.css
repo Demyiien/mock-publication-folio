@@ -31,7 +31,7 @@
   /* Typography */
   --font-display: 'Instrument Serif', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-mono: 'Courier Prime', 'Courier New', Courier, monospace;
 
   /* Spacing Scale */
   --space-1: 0.25rem;
