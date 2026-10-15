@@ -1,35 +1,10 @@
-import { LayoutGrid, Rows3 } from 'lucide-react';
-import type { ViewMode } from '../../types/folio';
-import { ISSUE_META } from '../../data/folioEntries';
 import ttspLogo from '../../assets/images/ttsp-logo.png';
-import { Button } from '../ui/Button';
-import { MetaItem } from '../ui/MetaItem';
+import { ISSUE_META } from '../../data/folioEntries';
 
-interface MastheadProps {
-  viewMode: ViewMode;
-  onViewModeChange: (mode: ViewMode) => void;
-  totalWorks: number;
-}
-
-const ICON_PROPS = { size: 15, strokeWidth: 1.25 } as const;
-
-const VIEW_OPTIONS: { mode: ViewMode; label: string; icon: JSX.Element }[] = [
-  { mode: 'grid', label: 'Gallery Grid', icon: <LayoutGrid {...ICON_PROPS} /> },
-  { mode: 'ledger', label: 'Archival Ledger', icon: <Rows3 {...ICON_PROPS} /> },
-];
-
-/** Top archival bar: publication identity, issue metadata, and catalog view switcher. */
-export function Masthead({ viewMode, onViewModeChange, totalWorks }: MastheadProps) {
+/** Top archival bar: publication identity. */
+export function Masthead() {
   return (
     <header className="masthead">
-      <div className="masthead__strip container">
-        <div className="masthead__meta">
-          <MetaItem label="ISSUE" value={ISSUE_META.issueDate} />
-          <MetaItem label="VOL" value="XLII" />
-          <MetaItem label="WORKS" value={String(totalWorks).padStart(2, '0')} />
-        </div>
-      </div>
-
       <div className="masthead__bar container">
         <a className="masthead__identity" href="#top" aria-label="The TTSP Folio — back to top">
           <img
@@ -46,21 +21,6 @@ export function Masthead({ viewMode, onViewModeChange, totalWorks }: MastheadPro
             <span className="masthead__motto">“{ISSUE_META.motto}”</span>
           </span>
         </a>
-
-        <div className="masthead__switcher" role="group" aria-label="Catalog view">
-          {VIEW_OPTIONS.map(({ mode, label, icon }) => (
-            <Button
-              key={mode}
-              size="sm"
-              icon={icon}
-              isActive={viewMode === mode}
-              aria-pressed={viewMode === mode}
-              onClick={() => onViewModeChange(mode)}
-            >
-              {label}
-            </Button>
-          ))}
-        </div>
       </div>
     </header>
   );

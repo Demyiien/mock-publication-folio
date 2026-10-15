@@ -13,8 +13,6 @@ export type FolioTheme =
   | 'Mother Tongue'
   | 'Urban Rust';
 
-export type ViewMode = 'grid' | 'ledger';
-
 /** Sentinel used by filters to represent "no restriction". */
 export type FilterAll = 'All';
 
@@ -35,7 +33,7 @@ export interface FolioEntry {
   medium: FolioMedium;
   theme: FolioTheme;
   author: Author;
-  publishedDate: string; // e.g., "OCT 2026 // VOL. XLII"
+  publishedDate: string; // e.g., "OCT 2026"
   specsOrReadTime: string; // e.g., "4 MIN READ" or "INK & HALFTONE // 300 DPI"
   excerpt: string;
   pullQuote: string;

@@ -5,7 +5,6 @@ import type {
   FolioTheme,
   MediumFilter,
   ThemeFilter,
-  ViewMode,
 } from '../types/folio';
 
 type CountMap<K extends string> = Record<K | 'All', number>;
@@ -58,7 +57,6 @@ export function useFolioCatalog({ entries, mediums, themes }: UseFolioCatalogOpt
   const [query, setQuery] = useState('');
   const [medium, setMedium] = useState<MediumFilter>('All');
   const [theme, setTheme] = useState<ThemeFilter>('All');
-  const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [activeEntryId, setActiveEntryId] = useState<string | null>(null);
 
   const normalizedQuery = normalize(query);
@@ -144,9 +142,6 @@ export function useFolioCatalog({ entries, mediums, themes }: UseFolioCatalogOpt
     mediumCounts,
     themeCounts,
     featuredEntry,
-    // view
-    viewMode,
-    setViewMode,
     // reader
     activeEntry,
     activePosition: { index: activeIndex, total: navigationList.length },

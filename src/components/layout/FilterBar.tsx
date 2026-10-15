@@ -67,7 +67,7 @@ export function FilterBar({
 }: FilterBarProps) {
   return (
     <div className="filter-bar">
-      <div className="filter-bar__search">
+      <div className="filter-bar__row filter-bar__search">
         <label htmlFor="folio-search" className="filter-bar__legend">
           Search
         </label>
@@ -104,7 +104,7 @@ export function FilterBar({
 
       <FacetRow
         legend="Medium"
-        allLabel="All Mediums"
+        allLabel="All"
         options={mediums}
         value={medium}
         counts={mediumCounts}
@@ -112,7 +112,7 @@ export function FilterBar({
       />
       <FacetRow
         legend="Theme"
-        allLabel="All Themes"
+        allLabel="All"
         options={themes}
         value={theme}
         counts={themeCounts}

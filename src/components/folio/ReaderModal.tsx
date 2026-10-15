@@ -228,6 +228,7 @@ export function ReaderModal({ entry, position, onClose, onNext, onPrevious }: Re
               <PullQuote quote={entry.pullQuote} />
 
               <div className="reader__specs">
+                <MetaItem label="AUTHOR" value={entry.author.name} />
                 <MetaItem label="MEDIUM" value={entry.medium.toUpperCase()} />
                 <MetaItem label="THEME" value={entry.theme.toUpperCase()} />
                 <MetaItem label="SPECS" value={entry.specsOrReadTime} />

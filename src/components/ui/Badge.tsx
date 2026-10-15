@@ -6,8 +6,8 @@ interface BadgeProps {
 }
 
 /**
- * Archival tag for mediums, themes, and status indicators.
- * Reused in: Masthead, FolioCard, LedgerRow, ReaderModal.
+ * Archival tag for themes and status indicators.
+ * Reused in: ReaderModal.
  */
 export function Badge({ label, variant = 'outline', size = 'sm', className }: BadgeProps) {
   const classes = ['badge', `badge--${variant}`, `badge--${size}`, className].filter(Boolean).join(' ');

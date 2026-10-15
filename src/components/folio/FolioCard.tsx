@@ -1,5 +1,4 @@
 import type { FolioEntry } from '../../types/folio';
-import { Badge } from '../ui/Badge';
 
 interface FolioCardProps {
   entry: FolioEntry;
@@ -7,17 +6,24 @@ interface FolioCardProps {
   onSelect: (entry: FolioEntry) => void;
 }
 
+function getPreviewContent(entry: FolioEntry, separator: string = ' '): string {
+  if (entry.bodyContent && entry.bodyContent.length > 0) {
+    return entry.bodyContent.join(separator);
+  }
+  return entry.excerpt;
+}
+
 /**
  * Medium-specific preview slot. This is the ONLY place card markup diverges
  * by medium; the header, title block, and footer are shared by every entry.
  */
-function CardPreview({ entry }: { entry: FolioEntry }) {
+function CardPreview({ entry, isFeatured: _isFeatured }: { entry: FolioEntry; isFeatured?: boolean }) {
   switch (entry.medium) {
     case 'Poetry':
-      return <p className="folio-card__verse">{entry.excerpt}</p>;
+      return <p className="folio-card__verse">{getPreviewContent(entry, '\n\n')}</p>;
 
     case 'Short Essay':
-      return <p className="folio-card__prose drop-cap">{entry.excerpt}</p>;
+      return <p className="folio-card__prose drop-cap">{getPreviewContent(entry, ' ')}</p>;
 
     case 'Editorial Cartoon':
     case 'Photo Essay':
@@ -37,31 +43,29 @@ function CardPreview({ entry }: { entry: FolioEntry }) {
             )}
             <span className="artwork-frame__vignette" aria-hidden="true" />
             <span className="artwork-frame__tint" aria-hidden="true" />
-            <Badge label={entry.specsOrReadTime} variant="muted" className="artwork-frame__specs" />
           </div>
-          {(entry.artworkCaption || entry.artworkSource) && (
-            <figcaption className="folio-card__caption">
-              {entry.artworkCaption && <span>{entry.artworkCaption}</span>}
-              {entry.artworkSource && (
-                <span className="folio-card__source">
-                  Photo:{' '}
-                  {entry.artworkSourceUrl ? (
-                    <a
-                      href={entry.artworkSourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="folio-card__source-link"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {entry.artworkSource} ↗
-                    </a>
-                  ) : (
-                    entry.artworkSource
-                  )}
-                </span>
-              )}
-            </figcaption>
-          )}
+          <figcaption className="folio-card__caption">
+            {entry.artworkCaption && <p className="folio-card__caption-title">{entry.artworkCaption}</p>}
+            <p className="folio-card__artwork-excerpt">{getPreviewContent(entry, ' ')}</p>
+            {entry.artworkSource && (
+              <span className="folio-card__source">
+                Photo:{' '}
+                {entry.artworkSourceUrl ? (
+                  <a
+                    href={entry.artworkSourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="folio-card__source-link"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {entry.artworkSource} ↗
+                  </a>
+                ) : (
+                  entry.artworkSource
+                )}
+              </span>
+            )}
+          </figcaption>
         </figure>
       );
   }
@@ -76,11 +80,8 @@ export function FolioCard({ entry, variant = 'standard', onSelect }: FolioCardPr
 
   return (
     <article className={`folio-card folio-card--${variant}`} aria-labelledby={titleId}>
-      <div className="folio-card__header">
-        <Badge label={entry.medium} variant="maroon" />
-      </div>
-
       <div className="folio-card__title-block">
+        <span className="folio-card__medium">{entry.medium}</span>
         {variant === 'featured' && <span className="folio-card__eyebrow">Featured Exhibition</span>}
         <h3 className="folio-card__title" id={titleId}>
           {entry.title}
@@ -90,15 +91,16 @@ export function FolioCard({ entry, variant = 'standard', onSelect }: FolioCardPr
       </div>
 
       <div className="folio-card__preview">
-        <CardPreview entry={entry} />
+        <CardPreview entry={entry} isFeatured={variant === 'featured'} />
       </div>
 
       <div className="folio-card__footer">
+        <span className="folio-card__author">{entry.author.name}</span>
         <button
           type="button"
           className="folio-card__trigger"
           onClick={() => onSelect(entry)}
-          aria-label={`Inspect work: ${entry.title}`}
+          aria-label={`View work: ${entry.title}`}
         >
           Read More <span aria-hidden="true">↗</span>
         </button>

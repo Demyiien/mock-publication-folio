@@ -1,7 +1,7 @@
 import type { FolioEntry, FolioMedium, FolioTheme } from '../types/folio';
 
 /**
- * Static exhibition dataset — Folio XLII.
+ * Static exhibition dataset.
  * Eight curated works with generic title placeholders, classical Lorem Ipsum text,
  * accurate photo sources, and typographic middle dot dividers.
  */
@@ -25,10 +25,10 @@ export const FOLIO_THEMES: readonly FolioTheme[] = [
 
 export const ISSUE_META = {
   publication: 'The Technologian Student Press',
-  folio: 'Folio XLII',
+  folio: 'The TTSP Folio',
   motto: 'Documentation, Literature & Visual Arts Archive',
   issueDate: 'OCT 2026',
-  volume: 'VOL. XLII',
+  volume: '',
   issueTitle: 'Exhibition Foreword & Selected Works',
 } as const;
 
@@ -45,7 +45,7 @@ export const folioEntries: FolioEntry[] = [
       programAndYear: 'BA Literature III',
       deskRole: 'Staff Writer',
     },
-    publishedDate: 'OCT 2026 · VOL. XLII',
+    publishedDate: 'OCT 2026',
     specsOrReadTime: '5 STANZAS · 3 MIN READ',
     excerpt:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit,\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam, quis nostrud exercitation.',
@@ -72,7 +72,7 @@ export const folioEntries: FolioEntry[] = [
       programAndYear: 'BS Journalism IV',
       deskRole: 'Managing Editor',
     },
-    publishedDate: 'OCT 2026 · VOL. XLII',
+    publishedDate: 'OCT 2026',
     specsOrReadTime: '1,240 WORDS · 6 MIN READ',
     excerpt:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -99,7 +99,7 @@ export const folioEntries: FolioEntry[] = [
       programAndYear: 'Contributing Artist',
       deskRole: 'Unsplash Photography',
     },
-    publishedDate: 'OCT 2026 · VOL. XLII',
+    publishedDate: 'OCT 2026',
     specsOrReadTime: '35MM · ILFORD HP5+ · 300 DPI',
     excerpt:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.',
@@ -122,8 +122,8 @@ export const folioEntries: FolioEntry[] = [
   {
     id: 'editorial-cartoon-01',
     catalogNumber: 'CAT-04',
-    title: 'Editorial Cartoon 01',
-    subtitle: 'Plate Study in Halftone & Ink',
+    title: 'The Daily Broadsheet',
+    subtitle: 'Presswork & Financial Chronicle',
     medium: 'Editorial Cartoon',
     theme: 'Dissent & Memory',
     author: {
@@ -131,8 +131,8 @@ export const folioEntries: FolioEntry[] = [
       programAndYear: 'Contributing Artist',
       deskRole: 'Unsplash Visual Archive',
     },
-    publishedDate: 'OCT 2026 · VOL. XLII',
-    specsOrReadTime: 'INK & HALFTONE · 300 DPI',
+    publishedDate: 'OCT 2026',
+    specsOrReadTime: 'NEWSPAPER PRINT · 300 DPI',
     excerpt:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
     pullQuote:
@@ -141,11 +141,11 @@ export const folioEntries: FolioEntry[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-      'Curatorial note: Stippled monochrome halftone on Bristol board, 11 × 17 in. Digitized plate study archived at 300 DPI.',
+      'Curatorial note: High-resolution monochrome study of printed business broadsheet columns and typographic press layout.',
     ],
     artworkUrl: unsplash('photo-1504711434969-e33886168f5c'),
     artworkCaption:
-      'Plate 02. Stacked broadsheets with typography halftone details. Digitized archive plate study at 300 DPI.',
+      'Plate 02. Printed business broadsheet newspaper articles and typographic presswork. Archival scan at 300 DPI.',
     artworkSource: 'AbsolutVision on Unsplash',
     artworkSourceUrl:
       'https://unsplash.com/photos/business-newspaper-article-WYd_PkCa1BY',
@@ -163,7 +163,7 @@ export const folioEntries: FolioEntry[] = [
       programAndYear: 'BS Computer Science III',
       deskRole: 'Literary Contributor',
     },
-    publishedDate: 'OCT 2026 · VOL. XLII',
+    publishedDate: 'OCT 2026',
     specsOrReadTime: '4 STANZAS · 2 MIN READ',
     excerpt:
       'Aenean commodo ligula eget dolor,\naenean massa. Cum sociis natoque penatibus et magnis\ndis parturient montes, nascetur ridiculus mus.',
@@ -189,7 +189,7 @@ export const folioEntries: FolioEntry[] = [
       programAndYear: 'BA Literature II',
       deskRole: 'Staff Columnist',
     },
-    publishedDate: 'OCT 2026 · VOL. XLII',
+    publishedDate: 'OCT 2026',
     specsOrReadTime: '980 WORDS · 5 MIN READ',
     excerpt:
       'Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero.',
@@ -207,8 +207,8 @@ export const folioEntries: FolioEntry[] = [
   {
     id: 'editorial-cartoon-02',
     catalogNumber: 'CAT-07',
-    title: 'Editorial Cartoon 02',
-    subtitle: 'Archival Study & Composition',
+    title: 'The Morning Reader',
+    subtitle: 'Park Bench Press Chronicle',
     medium: 'Editorial Cartoon',
     theme: 'Campus Ephemera',
     author: {
@@ -216,8 +216,8 @@ export const folioEntries: FolioEntry[] = [
       programAndYear: 'Contributing Artist',
       deskRole: 'Unsplash Visual Archive',
     },
-    publishedDate: 'OCT 2026 · VOL. XLII',
-    specsOrReadTime: 'CHARCOAL & XEROX · 600 DPI',
+    publishedDate: 'OCT 2026',
+    specsOrReadTime: 'STREET SCENE · 600 DPI',
     excerpt:
       'Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.',
     pullQuote:
@@ -225,11 +225,11 @@ export const folioEntries: FolioEntry[] = [
     bodyContent: [
       'Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.',
       'Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero.',
-      'Curatorial note: Charcoal, xerox toner, and newsprint collage on chipboard, 18 × 24 in. Pressroom archival plate study digitized at 600 DPI.',
+      'Curatorial note: Candid monochrome street capture of a park bench reader engrossed in the morning edition.',
     ],
     artworkUrl: unsplash('photo-1495020689067-958852a7765e'),
     artworkCaption:
-      'Plate 03. Reading broadsheet newspaper composition, archival toner and newsprint texture study.',
+      'Plate 03. Man seated on an outdoor park bench reading the morning newspaper broadsheet.',
     artworkSource: 'Roman Kraft on Unsplash',
     artworkSourceUrl:
       'https://unsplash.com/photos/man-sitting-on-bench-reading-newspaper-_Zua2hyvTBk',
@@ -247,7 +247,7 @@ export const folioEntries: FolioEntry[] = [
       programAndYear: 'Contributing Artist',
       deskRole: 'Unsplash Photography',
     },
-    publishedDate: 'OCT 2026 · VOL. XLII',
+    publishedDate: 'OCT 2026',
     specsOrReadTime: 'DIGITAL MONOCHROME · 24 MP RAW',
     excerpt:
       'Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut.',

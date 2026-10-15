@@ -18,7 +18,6 @@ export function HeroManifesto({ featuredEntry, onSelect, stats }: HeroManifestoP
       <SectionHeader
         indexNumber="01"
         title="Curator's Foreword & Featured Work"
-        subtitle="Folio XLII · Annual Literary & Visual Arts Archive"
         headingId="section-foreword"
       />
 
