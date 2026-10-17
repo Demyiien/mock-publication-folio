@@ -1,0 +1,159 @@
+/* ==========================================================================
+   LAYOUT — container, Swiss 12-column grid, broadsheet section frames,
+   hairline catalog grid, and responsive breakpoints.
+   Breakpoints: 1024 (laptop) · 768 (tablet) · 640 (large phone) · 480 (phone)
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.main {
+  padding-top: var(--space-8);
+}
+
+/* Each section is a broadsheet column: exposed hairline rules on both sides. */
+.section {
+  border-inline: var(--border-hairline);
+  border-bottom: var(--border-hairline);
+  scroll-margin-top: calc(var(--masthead-height) + var(--space-4));
+}
+
+.section + .section {
+  margin-top: var(--space-10);
+}
+
+/* --------------------------------------------------------------------------
+   Swiss 12-column grid
+   -------------------------------------------------------------------------- */
+
+.swiss-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+/* Hero — 7 / 5 asymmetric split */
+.hero__manifesto {
+  grid-column: 1 / span 7;
+}
+
+.hero__spotlight {
+  grid-column: 8 / span 5;
+  border-left: var(--border-hairline);
+}
+
+/* Colophon — 5 / 3 / 4 split */
+.colophon__charter {
+  grid-column: span 5;
+}
+
+.colophon__specs {
+  grid-column: span 3;
+}
+
+.colophon__components {
+  grid-column: span 4;
+}
+
+/* --------------------------------------------------------------------------
+   Catalog — Pinterest-style masonry grid: vertical columns with fixed widths,
+   varying card heights depending on media's natural aspect ratio.
+   -------------------------------------------------------------------------- */
+
+.catalog-grid {
+  column-count: 3;
+  column-gap: var(--space-5);
+  list-style: none;
+  padding: var(--space-5);
+  margin: 0;
+}
+
+.catalog-grid__cell {
+  display: block;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: var(--space-5);
+}
+
+.catalog-grid__cell > * {
+  width: 100%;
+}
+
+/* Board credits */
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .hero__manifesto,
+  .hero__spotlight {
+    grid-column: 1 / -1;
+  }
+
+  .hero__spotlight {
+    border-left: none;
+    border-top: var(--border-hairline);
+  }
+
+  .catalog-grid {
+    column-count: 2;
+    column-gap: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .catalog-grid__cell {
+    margin-bottom: var(--space-4);
+  }
+
+  .colophon__charter {
+    grid-column: 1 / -1;
+  }
+
+  .colophon__specs,
+  .colophon__components {
+    grid-column: span 6;
+  }
+
+  .board-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding-top: var(--space-5);
+  }
+
+  .section + .section {
+    margin-top: var(--space-8);
+  }
+
+  .colophon__specs,
+  .colophon__components {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .catalog-grid {
+    column-count: 1;
+    column-gap: 0;
+    padding: var(--space-3);
+  }
+
+  .catalog-grid__cell {
+    margin-bottom: var(--space-3);
+  }
+
+  .board-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
