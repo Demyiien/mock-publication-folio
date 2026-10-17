@@ -754,19 +754,14 @@
   overflow: hidden;
 }
 
+/* Open/close "genie" motion is driven from ReaderModal via the Web Animations API. */
 .reader[open] {
-  animation: reader-enter var(--transition-base);
+  transform-origin: 50% 50%;
+  will-change: transform, clip-path, opacity;
 }
 
 .reader::backdrop {
   background: var(--overlay-modal);
-}
-
-@keyframes reader-enter {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
 }
 
 .reader__shell {
@@ -1153,7 +1148,7 @@
   grid-column: 1 / -1;
   padding-top: var(--space-4);
   border-top: 1px dashed var(--border-color);
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 0.9375rem;
   font-style: italic;
   color: var(--text-primary);

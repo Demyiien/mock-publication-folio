@@ -76,11 +76,11 @@
 :root {
   /* Typography
      - Display / Headers: BL Melody (Sans-Serif)
-     - Body & Literary Prose: Merriweather (Editorial Serif)
-     - UI Controls, Metadata & Bylines: Montserrat (Geometric Sans-Serif) */
+     - Body & Literary Prose: Montserrat (Geometric Sans-Serif)
+     - UI Controls, Metadata & Bylines: Merriweather (Editorial Serif) */
   --font-display: 'BL Melody', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-sans: 'Merriweather', Georgia, serif;
-  --font-mono: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Merriweather', Georgia, serif;
 
   /* Spacing Scale */
   --space-1: 0.25rem;
@@ -116,7 +116,7 @@
   --leading-body: 1.72;
   --leading-verse: 1.9;
 
-  --tracking-mono: 0.12em;
+  --tracking-mono: 0.08em;
   --tracking-wide: 0.06em;
   --tracking-display: -0.025em;
 

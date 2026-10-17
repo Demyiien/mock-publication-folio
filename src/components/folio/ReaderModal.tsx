@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import type { KeyboardEvent, MouseEvent } from 'react';
+import type { KeyboardEvent, MouseEvent, SyntheticEvent } from 'react';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
 import type { FolioEntry, FolioMedium } from '../../types/folio';
 import { Badge } from '../ui/Badge';
@@ -118,24 +118,210 @@ function ReadingCanvas({ entry }: { entry: FolioEntry }) {
 }
 
 /* --------------------------------------------------------------------------
-   Modal shell — native <dialog> (top layer, focus trapping, Esc handling).
+   Genie transition — macOS-style "pulled from origin" open / reverse close.
    -------------------------------------------------------------------------- */
 
-const supportsClosedBy =
-  typeof HTMLDialogElement !== 'undefined' && 'closedBy' in HTMLDialogElement.prototype;
+const GENIE_EASING = 'cubic-bezier(0.22, 0.9, 0.3, 1)';
+const GENIE_OPEN_MS = 620;
+const GENIE_CLOSE_MS = 300;
+
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const isInViewport = (rect: DOMRect) =>
+  rect.width > 0 &&
+  rect.bottom > 0 &&
+  rect.right > 0 &&
+  rect.top < window.innerHeight &&
+  rect.left < window.innerWidth;
+
+/** Fallback origin: a small "dock" slot at the bottom-center of the viewport. */
+const dockRect = () =>
+  new DOMRect(window.innerWidth / 2 - 40, window.innerHeight - 24, 80, 24);
+
+/**
+ * Keyframes from the origin card (`from`) to the dialog's resting box (`to`).
+ * The sheet starts as a thin, pinched sliver over the card, is stretched out
+ * toward the center, then widens smoothly into place. The edge facing the
+ * origin stays pinched until late in the motion, like the genie effect.
+ */
+function genieKeyframes(from: DOMRect, to: DOMRect): Keyframe[] {
+  const dx = from.left + from.width / 2 - (to.left + to.width / 2);
+  const dy = from.top + from.height / 2 - (to.top + to.height / 2);
+  const sx = clamp(from.width / to.width, 0.04, 1);
+  const sy = clamp(from.height / to.height, 0.04, 1);
+
+  // Pinch the edge nearest the origin (bottom if the card sits below center).
+  const pinch = (amount: number) =>
+    dy >= 0
+      ? `polygon(0% 0%, 100% 0%, ${100 - amount}% 100%, ${amount}% 100%)`
+      : `polygon(${amount}% 0%, ${100 - amount}% 0%, 100% 100%, 0% 100%)`;
+
+  return [
+    {
+      offset: 0,
+      opacity: 0,
+      transform: `translate(${dx}px, ${dy}px) scale(${sx * 0.2}, ${sy * 0.6})`,
+      clipPath: pinch(40),
+    },
+    {
+      offset: 0.18,
+      opacity: 1,
+      transform: `translate(${dx * 0.8}px, ${dy * 0.8}px) scale(${Math.max(sx * 0.28, 0.05)}, ${Math.max(sy, 0.5)})`,
+      clipPath: pinch(36),
+    },
+    {
+      offset: 0.5,
+      transform: `translate(${dx * 0.3}px, ${dy * 0.3}px) scale(0.42, 0.96)`,
+      clipPath: pinch(18),
+    },
+    {
+      offset: 0.8,
+      transform: `translate(${dx * 0.04}px, ${dy * 0.04}px) scale(0.94, 1.005)`,
+      clipPath: pinch(3),
+    },
+    {
+      offset: 1,
+      opacity: 1,
+      transform: 'translate(0px, 0px) scale(1, 1)',
+      clipPath: pinch(0),
+    },
+  ];
+}
+
+/**
+ * Dedicated close keyframes — one continuous, accelerating motion back into
+ * the origin card. Kept to three stops (no mid-way stretching) so it reads
+ * as a single clean "suck in" rather than a replay of the open sequence.
+ */
+function genieCloseKeyframes(from: DOMRect, to: DOMRect): Keyframe[] {
+  const dx = from.left + from.width / 2 - (to.left + to.width / 2);
+  const dy = from.top + from.height / 2 - (to.top + to.height / 2);
+  const sx = clamp(from.width / to.width, 0.15, 1);
+  const sy = clamp(from.height / to.height, 0.15, 1);
+
+  const pinch = (amount: number) =>
+    dy >= 0
+      ? `polygon(0% 0%, 100% 0%, ${100 - amount}% 100%, ${amount}% 100%)`
+      : `polygon(${amount}% 0%, ${100 - amount}% 0%, 100% 100%, 0% 100%)`;
+
+  return [
+    { offset: 0, opacity: 1, transform: 'translate(0px, 0px) scale(1, 1)', clipPath: pinch(0) },
+    {
+      offset: 0.6,
+      opacity: 1,
+      transform: `translate(${dx * 0.5}px, ${dy * 0.5}px) scale(${(1 + sx) / 2.4}, ${(1 + sy) / 2})`,
+      clipPath: pinch(16),
+    },
+    {
+      offset: 1,
+      opacity: 0,
+      transform: `translate(${dx}px, ${dy}px) scale(${sx * 0.5}, ${sy * 0.7})`,
+      clipPath: pinch(30),
+    },
+  ];
+}
+
+const GENIE_CLOSE_EASING = 'cubic-bezier(0.4, 0, 0.6, 1)';
+
+/* --------------------------------------------------------------------------
+   Modal shell — native <dialog> (top layer, focus trapping, Esc handling).
+   -------------------------------------------------------------------------- */
 
 export function ReaderModal({ entry, position, onClose, onNext, onPrevious }: ReaderModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
   const dossierRef = useRef<HTMLElement>(null);
+  const originRef = useRef<Element | null>(null);
+  const closingRef = useRef(false);
+
+  // Remember which card the user pressed so the reader can grow out of it.
+  useEffect(() => {
+    const capture = (event: PointerEvent | globalThis.KeyboardEvent) => {
+      const card = (event.target as Element | null)?.closest?.('.folio-card');
+      if (card) originRef.current = card;
+    };
+    document.addEventListener('pointerdown', capture, true);
+    document.addEventListener('keydown', capture, true);
+    return () => {
+      document.removeEventListener('pointerdown', capture, true);
+      document.removeEventListener('keydown', capture, true);
+    };
+  }, []);
+
+  /** Resolve the on-screen card for the current entry (falls back to the dock). */
+  const resolveOriginRect = (entryId?: string): DOMRect => {
+    const remembered = originRef.current;
+    if (
+      remembered?.isConnected &&
+      (!entryId || remembered.getAttribute('data-entry-id') === entryId)
+    ) {
+      const rect = remembered.getBoundingClientRect();
+      if (isInViewport(rect)) return rect;
+    }
+    if (entryId) {
+      const cards = document.querySelectorAll(`.folio-card[data-entry-id="${CSS.escape(entryId)}"]`);
+      for (const card of cards) {
+        const rect = card.getBoundingClientRect();
+        if (isInViewport(rect)) return rect;
+      }
+    }
+    return dockRect();
+  };
+
+  const runGenie = (dialog: HTMLDialogElement, direction: 'open' | 'close') => {
+    dialog.getAnimations({ subtree: true }).forEach((animation) => animation.cancel());
+    const origin = resolveOriginRect(entry?.id);
+    const sheet = dialog.getBoundingClientRect();
+    const isOpen = direction === 'open';
+    const duration = isOpen ? GENIE_OPEN_MS : GENIE_CLOSE_MS;
+
+    dialog.animate(
+      { opacity: isOpen ? [0, 1] : [1, 0] },
+      { duration, easing: isOpen ? 'ease-out' : 'ease-in', fill: 'both', pseudoElement: '::backdrop' },
+    );
+    return dialog.animate(isOpen ? genieKeyframes(origin, sheet) : genieCloseKeyframes(origin, sheet), {
+      duration,
+      easing: isOpen ? GENIE_EASING : GENIE_CLOSE_EASING,
+      fill: 'both',
+    });
+  };
+
+  /** Animated close — every dismiss path funnels through here. */
+  const requestClose = () => {
+    const dialog = dialogRef.current;
+    if (!dialog?.open || closingRef.current) return;
+    if (prefersReducedMotion() || typeof dialog.animate !== 'function') {
+      dialog.close();
+      return;
+    }
+    closingRef.current = true;
+    const animation = runGenie(dialog, 'close');
+    const finish = () => {
+      closingRef.current = false;
+      dialog.close();
+      dialog.getAnimations({ subtree: true }).forEach((a) => a.cancel());
+    };
+    animation.finished.then(finish, finish);
+  };
 
   // Sync the native dialog's open state with the active entry.
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
-    dialog.setAttribute('closedby', 'any'); // declarative light-dismiss where supported
-    if (entry && !dialog.open) dialog.showModal();
+    if (entry && !dialog.open) {
+      dialog.showModal();
+      if (!prefersReducedMotion() && typeof dialog.animate === 'function') {
+        runGenie(dialog, 'open').finished.then(
+          () => dialog.getAnimations({ subtree: true }).forEach((a) => a.cancel()),
+          () => undefined,
+        );
+      }
+    }
     if (!entry && dialog.open) dialog.close();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entry]);
 
   // Every new work starts at the top of the page.
@@ -155,9 +341,15 @@ export function ReaderModal({ entry, position, onClose, onNext, onPrevious }: Re
     }
   };
 
-  // Light-dismiss fallback for browsers without `closedby` support (Safari).
+  // Esc: swap the instant native close for the reverse genie animation.
+  const handleCancel = (event: SyntheticEvent<HTMLDialogElement>) => {
+    if (!event.nativeEvent.cancelable) return;
+    event.preventDefault();
+    requestClose();
+  };
+
+  // Light-dismiss: clicking the backdrop (outside the sheet) closes the reader.
   const handleBackdropClick = (event: MouseEvent<HTMLDialogElement>) => {
-    if (supportsClosedBy) return;
     const dialog = dialogRef.current;
     if (!dialog || event.target !== dialog) return;
     const rect = dialog.getBoundingClientRect();
@@ -166,7 +358,7 @@ export function ReaderModal({ entry, position, onClose, onNext, onPrevious }: Re
       event.clientY <= rect.bottom &&
       rect.left <= event.clientX &&
       event.clientX <= rect.right;
-    if (!inside) dialog.close();
+    if (!inside) requestClose();
   };
 
   const titleId = 'reader-modal-title';
@@ -178,6 +370,7 @@ export function ReaderModal({ entry, position, onClose, onNext, onPrevious }: Re
       aria-labelledby={entry ? titleId : undefined}
       aria-label={entry ? undefined : 'Exhibition reader'}
       onClose={onClose}
+      onCancel={handleCancel}
       onKeyDown={handleKeyDown}
       onClick={handleBackdropClick}
     >
@@ -194,7 +387,7 @@ export function ReaderModal({ entry, position, onClose, onNext, onPrevious }: Re
               variant="icon"
               icon={<X {...ICON_PROPS} />}
               aria-label="Close reader (Escape)"
-              onClick={() => dialogRef.current?.close()}
+              onClick={requestClose}
             />
           </div>
 

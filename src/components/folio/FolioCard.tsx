@@ -77,7 +77,7 @@ export function FolioCard({ entry, variant = 'standard', onSelect }: FolioCardPr
   const titleId = `card-title-${variant}-${entry.id}`;
 
   return (
-    <article className={`folio-card folio-card--${variant}`} aria-labelledby={titleId}>
+    <article className={`folio-card folio-card--${variant}`} aria-labelledby={titleId} data-entry-id={entry.id}>
       <div className="folio-card__title-block">
         <span className="folio-card__medium">{entry.medium}</span>
         {variant === 'featured' && <span className="folio-card__eyebrow">Featured Exhibition</span>}
