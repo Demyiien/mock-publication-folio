@@ -44,3 +44,43 @@ mock-publication-folio/
 ├── package.json
 ├── tsconfig.json
 └── vite.config.ts
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+
+### Installation
+
+1. Clone the repository or extract the project files:
+   ```bash
+   cd mock-publication-folio
+   ```
+
+2. Install the dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and navigate to the local URL shown in your terminal (typically `http://localhost:5173`).
+
+## 📦 Building for Production
+
+To create an optimized production build:
+
+```bash
+npm run build
+```
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
